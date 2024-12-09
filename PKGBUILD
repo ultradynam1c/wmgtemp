@@ -6,7 +6,7 @@ pkgver=1.1
 pkgrel=4
 pkgdesc="Dockapp to graphically display CPU and SYS temperatures."
 url="http://fluxcode.net/projects/wmgtemp"
-arch=('i686' 'x86_64')
+arch=('i686' 'x86_64' 'aarch64')
 license=('GPL2')
 depends=('libxpm' 'lm_sensors')
 source=("http://fluxcode.net/files/wmgtemp-1.1.tar.gz"
@@ -22,7 +22,7 @@ prepare() {
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i "/MANINSTDIR=/d" Makefile
-  make PREFIX="/usr"
+  make PREFIX="/usr" CCFLAGS="-Wall -g -fcommon"
 }
  
 package() {
